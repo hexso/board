@@ -27,8 +27,11 @@ public class Comment {
     public static Comment createComment(CommentDto dto, Article article) {
         if (dto.getId() != null)
             throw new IllegalArgumentException("댓글 생성 실패! 댓글의 id가 없어야 합니다.");
-        if (dto.getArticleId() != article.getId())
-            throw new IllegalArgumentException("댓글 생성 실패! 게시글의 id가 잘못됐습니다.");
+        if (dto.getArticleId() != article.getId()) {
+            System.out.println(dto.getArticleId());
+            System.out.println(article.getId());
+            throw new IllegalArgumentException("댓글 생성 실패! 게시글의 id가 잘못됐습니다. " + article.getId());
+        }
         return new Comment(
                 dto.getId(),
                 article,
