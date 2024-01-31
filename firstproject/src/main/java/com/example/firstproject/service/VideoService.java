@@ -1,14 +1,14 @@
 package com.example.firstproject.service;
 
+import com.example.firstproject.data.TsRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.*;
-import java.util.UUID;
 
 @Service
 public class VideoService{
-    public StreamingResponseBody m3u8Index(UUID uuid) throws java.io.FileNotFoundException {
+    public StreamingResponseBody m3u8Index(Long id) throws java.io.FileNotFoundException {
 
         FileInputStream fileInputStream = new FileInputStream("C:\\Users\\kesu9\\OneDrive\\바탕 화면\\ffmpeg-6.1.1\\bin\\index.m3u");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -31,9 +31,9 @@ public class VideoService{
         };
     }
 
-    public StreamingResponseBody ts(String s) throws java.io.FileNotFoundException {
+    public StreamingResponseBody ts(TsRequest request) throws java.io.FileNotFoundException {
 
-        InputStream inputStream = new FileInputStream("C:\\Users\\kesu9\\OneDrive\\바탕 화면\\ffmpeg-6.1.1\\bin\\" + s);
+        InputStream inputStream = new FileInputStream("C:\\Users\\kesu9\\OneDrive\\바탕 화면\\ffmpeg-6.1.1\\bin\\" + request.getTs());
         return outputStream -> {
             try {
                 byte[] buffer = new byte[1024];

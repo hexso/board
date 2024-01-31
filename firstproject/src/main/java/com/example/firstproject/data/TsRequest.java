@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TsRequest {
 
+
     String id;
 
     String ts;
