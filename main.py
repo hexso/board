@@ -25,7 +25,7 @@ def change_mp4_to_hls(file_path):
         os.makedirs(dest_path)
     except FileExistsError:
         pass
-    ffmpeg_cmd = "ffmpeg -i {} -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls {}.m3u8".format(file_path, os.path.join(dest_path,"index"))
+    ffmpeg_cmd = "ffmpeg -i \"{}\" -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls \"{}.m3u8\"".format(file_path, os.path.join(dest_path,"index"))
     print(ffmpeg_cmd)
     os.system(ffmpeg_cmd)
 
@@ -33,4 +33,4 @@ if __name__ == "__main__":
     root_dir = "D:\\old"
     mp4_list = get_mp4_list(root_dir)
     print(mp4_list)
-    change_mp4_to_hls(mp4_list[1])
+    #change_mp4_to_hls(mp4_list[1])
