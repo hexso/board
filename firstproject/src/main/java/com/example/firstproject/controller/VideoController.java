@@ -40,8 +40,6 @@ public class VideoController {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("Content-Type", "application/vnd.apple.mpegurl");
             httpHeaders.set("Content-Disposition", "attachment;filename=" + ts);
-            log.info(id);
-            log.info(ts);
             StreamingResponseBody body = videoService.ts(new TsRequest(id, ts));
             return new ResponseEntity<>(body, httpHeaders, HttpStatus.OK);
         } catch(Exception e) {
