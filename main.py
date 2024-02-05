@@ -33,4 +33,3 @@ if __name__ == "__main__":
     root_dir = "D:\\old"
     mp4_list = get_mp4_list(root_dir)
     print(mp4_list)
-    #change_mp4_to_hls(mp4_list[1])

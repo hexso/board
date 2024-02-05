@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -46,5 +47,12 @@ public class VideoController {
             log.info(e.toString());
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/video")
+    public String video_player(Model model) {
+        String hlsUrl = "http://localhost:8080/video/1/index.m3u8";
+        model.addAttribute("hlsUrl",hlsUrl);
+        return "videos/video";
     }
 }
