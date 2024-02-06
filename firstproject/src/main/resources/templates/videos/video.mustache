@@ -1,3 +1,5 @@
+<div id="videos-list">
+{{#videoDtos}}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +11,7 @@
 </head>
 <body>
 <video id="my-video" class="video-js" controls preload="auto" width="720" height="480">
-    <source src="{{hlsUrl}}" type="application/x-mpegURL">
+    <source src="{{path}}" type="application/x-mpegURL">
 </video>
 <script>
     var player = videojs('my-video');
@@ -17,3 +19,5 @@
 </script>
 </body>
 </html>
+{{/videoDtos}}
+</div>

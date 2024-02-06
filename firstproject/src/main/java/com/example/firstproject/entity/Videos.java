@@ -16,9 +16,9 @@ public class Videos {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column
+    private Long article_id;
+    @Column
     private String path;
     @Column
     private String title;
-    @ManyToOne
-    private Long article_id;
 }

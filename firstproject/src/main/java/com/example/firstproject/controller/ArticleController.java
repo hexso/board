@@ -2,9 +2,13 @@ package com.example.firstproject.controller;
 
 import com.example.firstproject.dto.ArticleForm;
 import com.example.firstproject.dto.CommentDto;
+import com.example.firstproject.dto.VideoDto;
 import com.example.firstproject.entity.Article;
+import com.example.firstproject.entity.Videos;
 import com.example.firstproject.repository.ArticleRepository;
+import com.example.firstproject.repository.VideoRepository;
 import com.example.firstproject.service.CommentService;
+import com.example.firstproject.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,8 @@ public class ArticleController {
     private ArticleRepository articleRepository;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private VideoService videoService;
 
     @GetMapping("/articles/new")
     public String newArticleForm() {
@@ -45,9 +51,12 @@ public class ArticleController {
     public String show(@PathVariable Long id, Model model) {
         log.info("id = " + id);
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<VideoDto> videoDtos = videoService.videos(id);
+        log.info(videoDtos.toString());
         List<CommentDto> commentDtos = commentService.comments(id);
         model.addAttribute("article", articleEntity);
         model.addAttribute("commentDtos", commentDtos);
+        model.addAttribute("videoDtos", videoDtos);
         return "articles/show";
     }
 
