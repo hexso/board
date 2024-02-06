@@ -21,7 +21,7 @@ public class VideoController {
     private VideoService videoService;
 
     @GetMapping("/video/{id}/index.m3u8")
-    public ResponseEntity<StreamingResponseBody> video(@PathVariable Long id) {
+    public ResponseEntity<StreamingResponseBody> video(@PathVariable String id) {
         //UUID uuid = new UUID(1,2);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Content-Type", "application/vnd.apple.mpegurl");
@@ -52,7 +52,7 @@ public class VideoController {
 
     @GetMapping("/video")
     public String video_player(Model model) {
-        VideoDto videoDto = new VideoDto(1l,1l,"http://localhost:8080/video/1/index.m3u8","sample1");
+        VideoDto videoDto = new VideoDto(1l,1l,"http://localhost:8080/video/1/index.m3u8","sample1","http://localhost:8080/video/1/index.m3u8");
         model.addAttribute("videoDtos", videoDto);
         return "videos/video";
     }

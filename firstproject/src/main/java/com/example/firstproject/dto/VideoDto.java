@@ -16,13 +16,15 @@ public class VideoDto {
     private Long articleId;
     private String path;
     private String title;
+    private String videoLink;
 
     public static VideoDto createVideoDto(Videos videos) {
         return new VideoDto(
                 videos.getId(),
                 videos.getArticle_id(),
                 videos.getPath(),
-                videos.getTitle()
+                videos.getTitle(),
+                "http://localhost:8080/video/"+videos.getTitle()+"/index.m3u8"
         );
     }
 }

@@ -25,11 +25,6 @@ public class VideoService{
     @Autowired
     private VideoRepository videoRepository;
 
-    @Value("${ffmpeg.location}")
-    private String ffmpegPath;
-    @Value("${ffprobe.location}")
-    private String ffprobePath;
-
     public List<VideoDto> videos(Long articleId) {
         return videoRepository.findByArticleId(articleId)
                 .stream()
@@ -37,7 +32,7 @@ public class VideoService{
                 .collect(Collectors.toList());
     }
 
-    public StreamingResponseBody m3u8Index(Long id) throws java.io.FileNotFoundException {
+    public StreamingResponseBody m3u8Index(String id) throws java.io.FileNotFoundException {
 
         FileInputStream fileInputStream = new FileInputStream("D:\\new\\" + id + "\\index.m3u8");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -90,7 +85,7 @@ public class VideoService{
         }
     }
 
-    public boolean changeTom3u8(String filePath) {
+    public String changeTom3u8(String filePath) {
 
         Path folderPath = Paths.get(getFolderName(filePath));
         log.info(folderPath.toString());
@@ -102,7 +97,7 @@ public class VideoService{
         } catch (Exception e) {
             log.info("폴더 생성 중 오류가 발생했습니다.");
             e.printStackTrace();
-            return false;
+            return null;
         }
 
         String ffmpegCmd = "ffmpeg -i \"" + filePath + "\" -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls \"" + folderPath.toString() + "\\index.m3u8\"";
@@ -118,10 +113,10 @@ public class VideoService{
             log.info("FFmpeg 실행 종료 코드: " + exitCode);
         } catch (Exception e) {
             log.info(e.toString());
-            return false;
+            return null;
         }
         log.info("완료되었습니다.");
-        return true;
+        return folderPath.toString() + "\\index.m3u8";
     }
 
     public void save_file(MultipartFile videoFile, Article savedArticle) {
@@ -154,9 +149,9 @@ public class VideoService{
             Files.copy(videoFile.getInputStream(), filePath);
 
             // 파일 저장 성공 시 추가 작업 수행 가능
-            Videos videos = new Videos(null, savedArticle.getId(), filePath.toString(), savedArticle.getTitle());
+            String strFilePath = changeTom3u8(filePath.toString());
+            Videos videos = new Videos(null, savedArticle.getId(), strFilePath, savedArticle.getTitle());
             videoRepository.save(videos);
-            changeTom3u8(filePath.toString());
             log.info("파일이 성공적으로 업로드되었습니다.");
         } catch (IOException e) {
             log.info(e.toString());
