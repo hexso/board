@@ -43,7 +43,7 @@ public class ArticleController {
         log.info(article.toString());
         Article saved = articleRepository.save(article);
         log.info(saved.toString());
-        //System.out.println(saved.toString());
+        videoService.save_file(form.getFile(), saved);
         return "redirect:/articles/" + saved.getId();
     }
 
