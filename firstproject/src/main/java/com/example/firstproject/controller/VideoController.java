@@ -1,6 +1,7 @@
 package com.example.firstproject.controller;
 
 import com.example.firstproject.data.TsRequest;
+import com.example.firstproject.dto.VideoDto;
 import com.example.firstproject.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,8 @@ public class VideoController {
 
     @GetMapping("/video")
     public String video_player(Model model) {
-        String hlsUrl = "http://localhost:8080/video/1/index.m3u8";
-        model.addAttribute("hlsUrl",hlsUrl);
+        VideoDto videoDto = new VideoDto(1l,1l,"http://localhost:8080/video/1/index.m3u8","sample1");
+        model.addAttribute("videoDtos", videoDto);
         return "videos/video";
     }
 }

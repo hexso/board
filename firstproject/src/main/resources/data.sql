@@ -23,7 +23,7 @@ INSERT INTO comment(article_id, nickname, body) VALUES(6, 'Kim', '유튜브 시�
 INSERT INTO comment(article_id, nickname, body) VALUES(6, 'Choi', '독서');
 
 -- 게시글의 추가
-INSERT INTO videos(path, title, article_id) VALUES('D:\\new\\1\\index.m3u8', 'sample1', 1);
-INSERT INTO videos(path, title, article_id) VALUES('D:\\new\\2\\index.m3u8', 'sample2', 2);
-INSERT INTO videos(path, title, article_id) VALUES('D:\\new\\3\\index.m3u8', 'sample3', 3);
-INSERT INTO videos(path, title, article_id) VALUES('D:\\new\\4\\index.m3u8', 'sample4', 3);
+INSERT INTO videos(path, title, article_id) VALUES('http://localhost:8080/video/1/index.m3u8', 'sample1', 1);
+INSERT INTO videos(path, title, article_id) VALUES('http://localhost:8080/video/2/index.m3u8', 'sample2', 2);
+INSERT INTO videos(path, title, article_id) VALUES('http://localhost:8080/video/3/index.m3u8', 'sample3', 3);
+INSERT INTO videos(path, title, article_id) VALUES('http://localhost:8080/video/3/index.m3u8', 'sample4', 3);
